@@ -3,7 +3,6 @@ from book_library_app import db
 from marshmallow import Schema, fields, validate, validates, ValidationError
 from datetime import datetime, date, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
-# from book_library_app import Config
 from flask import current_app
 
 
@@ -114,4 +113,5 @@ class BookSchema(Schema):
 author_schema = AuthorSchema()
 book_schema = BookSchema()
 user_schema = UserSchema()
-user_password_update_schema = UserPasswordUpdateSchema
+user_password_update_schema = UserPasswordUpdateSchema()
+

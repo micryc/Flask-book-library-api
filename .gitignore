@@ -1,1 +1,6 @@
 .env
+flask-book-library-api.zip
+.idea/
+.pytest_cache/
+__pychache__/
+venv/

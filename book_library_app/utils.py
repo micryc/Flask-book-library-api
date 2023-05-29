@@ -4,7 +4,8 @@ from flask import request, url_for, current_app, abort
 from werkzeug.exceptions import UnsupportedMediaType
 from functools import wraps
 from typing import Tuple
-from flask_sqlalchemy import DefaultMeta, BaseQuery
+from flask_sqlalchemy.model import DefaultMeta
+from flask_sqlalchemy.query import Query
 from sqlalchemy.orm.attributes import InstrumentedAttribute
 from sqlalchemy.sql.expression import BinaryExpression
 
@@ -52,7 +53,7 @@ def get_schema_args(model: DefaultMeta):
     return schema_args
 
 
-def apply_order(model: DefaultMeta, query: BaseQuery) -> BaseQuery:
+def apply_order(model: DefaultMeta, query: Query):
     sort_keys = request.args.get('sort')
     if sort_keys:
         for key in sort_keys.split(','):
@@ -77,7 +78,7 @@ def _get_filter_argument(column_name: InstrumentedAttribute, value: str, operato
     return operator_mapping[operator]
 
 
-def apply_filter(model: DefaultMeta, query: BaseQuery) -> BaseQuery:
+def apply_filter(model: DefaultMeta, query: Query):
     for param, value in request.args.items():
         if param not in {'fields', 'sort', 'page', 'limit'}:
             operator = '=='
@@ -94,7 +95,7 @@ def apply_filter(model: DefaultMeta, query: BaseQuery) -> BaseQuery:
     return query
 
 
-def get_pagination(query: BaseQuery, func_name: str) -> Tuple[list, dict]:
+def get_pagination(query, func_name: str) -> Tuple[list, dict]:
     page = request.args.get('page', 1, type=int)
     limit = request.args.get('limit', current_app.config.get('PER_PAGE', 5), type=int)
     params = {key: value for key, value in request.args.items() if key != 'page'}

@@ -38,7 +38,6 @@ def add_data():
 
         db.session.commit()
 
-
         print('Data has been successfully added to database')
     except Exception as exc:
         print("Unexpected error: {}".format(exc))

@@ -5,6 +5,7 @@ from webargs.flaskparser import use_args
 from book_library_app.utils import validate_json_content_type, get_schema_args, apply_order, apply_filter, \
     get_pagination, token_required
 
+
 from book_library_app.authors import authors_bp
 
 
