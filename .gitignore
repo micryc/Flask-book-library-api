@@ -4,4 +4,3 @@ flask-book-library-api.zip
 .pytest_cache/
 __pychache__/
 venv/
-documentation.json
